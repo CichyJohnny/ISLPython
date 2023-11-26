@@ -31,7 +31,7 @@ auto = pd.concat([quants, auto[datatypes['qual']]], axis=1)
 
 
 # Own implementation of linear regression
-def linearModel(X, Y):
+def linear_model(X, Y):
     XTX_inv = np.linalg.inv(X.T @ X)
     XTY = X.T @ Y
     beta = XTX_inv @ XTY
@@ -47,10 +47,10 @@ intercept = pd.DataFrame({'intercept': np.ones(auto.shape[0])})
 X = pd.concat([intercept, auto['horsepower']], axis=1)
 Y = auto['mpg']
 
-coefficient = linearModel(X, Y)
+coefficient = linear_model(X, Y)
 y_pred = predict(coefficient, X)
 
-MSE = np.sum(np.square(Y - y_pred)) /Y.size
+MSE = np.sum(np.square(Y - y_pred)) / Y.size
 variance = MSE * (np.linalg.inv(X.T @ X).diagonal())
 standard_error = np.sqrt(variance)
 
